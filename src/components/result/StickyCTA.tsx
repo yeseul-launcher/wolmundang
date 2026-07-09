@@ -4,7 +4,7 @@ import { ChevronRight } from "lucide-react";
 export function StickyCTA({ label }: { label: string }) {
   return (
     <div
-      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[440px] -translate-x-1/2 px-4 pt-9 pb-[max(14px,env(safe-area-inset-bottom))]"
+      className="fixed bottom-0 left-1/2 z-50 w-full max-w-[440px] -translate-x-1/2 px-4 pt-9 pb-[max(28px,calc(env(safe-area-inset-bottom)+14px))]"
       style={{
         background:
           "linear-gradient(to top, #1a1a1f 0%, #1a1a1f 58%, rgba(26,26,31,0.82) 80%, transparent 100%)",
