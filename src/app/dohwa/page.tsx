@@ -5,12 +5,14 @@ import { BlurWord } from "@/components/result/BlurWord";
 import { LoveTypeRadarChart } from "@/components/result/LoveTypeRadarChart";
 import { MarriagePossibilityChart } from "@/components/result/MarriagePossibilityChart";
 import { ReviewSection } from "@/components/result/ReviewSection";
+import { TalismanSection } from "@/components/result/TalismanSection";
+import { StickyCTA } from "@/components/result/StickyCTA";
 import { dohwa, DOHWA_CHARACTER, DOHWA_REVIEWS } from "@/lib/dohwaData";
 
 export default function DohwaPage() {
   return (
     <div className="theme-dohwa relative mx-auto min-h-screen w-full max-w-[440px] overflow-x-clip bg-[#1a1a1f] text-white shadow-2xl">
-      <main className="flex w-full flex-col pb-[100px]">
+      <main className="flex w-full flex-col pb-[132px]">
         {/* 도화선녀 히어로 (영상 + 말풍선) */}
         <BubbleSection
           media={{
@@ -69,13 +71,6 @@ export default function DohwaPage() {
               네 그 넘치는 매력을 제대로 못 쓰고 엉뚱한 데 힘 빼고 있는 게 너무 안타까워서 그래. 리포트에 월별로 <BlurWord>어떤 남자를 조심하고</BlurWord> 어떤 시기에 <BlurWord>승부수를 던져야</BlurWord> 하는지 싹 다 적어놨어. 특별히 <BlurWord>남자 복 터지는 액막이 부적</BlurWord>까지 써줄 테니까, 얼른 확인해 봐.
             </p>
           </div>
-
-          <button
-            type="button"
-            className="mt-5 w-full rounded-lg bg-primary py-4 text-[16px] font-semibold text-white"
-          >
-            언니가 찾은 내 진짜 인연 확인하기
-          </button>
         </SajuChartSection>
 
         {/* 공감 (도화선녀 이미지 + 말풍선) */}
@@ -240,6 +235,9 @@ export default function DohwaPage() {
           ]}
         />
 
+        {/* 액막이 부적 */}
+        <TalismanSection />
+
         {/* 리뷰 캐러셀 */}
         <ReviewSection
           brandName={DOHWA_CHARACTER}
@@ -248,6 +246,8 @@ export default function DohwaPage() {
           reviews={DOHWA_REVIEWS}
         />
       </main>
+
+      <StickyCTA label="내 진짜 인연, 지금 확인하기" />
     </div>
   );
 }

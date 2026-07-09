@@ -288,3 +288,92 @@ input[type="number"] {
   --primary: #e75c9b;
   --ring: #e75c9b;
 }
+
+/* 재회여신 테마 (로즈레드 악센트) */
+.theme-jaehoe {
+  --mun-accent: #e14257;
+  --mun-accent-2: #f2899a;
+  --mun-accent-soft: #f2cfd5;
+  --mun-accent-soft-2: #f9dee2;
+  --primary: #e14257;
+  --ring: #e14257;
+}
+
+/* 연분선녀 테마 (자수정 보라 악센트) */
+.theme-yeonbun {
+  --mun-accent: #9b6cd6;
+  --mun-accent-2: #c3a2e8;
+  --mun-accent-soft: #ddd0ee;
+  --mun-accent-soft-2: #eae0f6;
+  --primary: #9b6cd6;
+  --ring: #9b6cd6;
+}
+
+/* ✨ 화려한 CTA: 악센트 그라데이션 + 광택 스윕 + 은은한 글로우 펄스 */
+.cta-shiny {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    116deg,
+    var(--mun-accent) 0%,
+    color-mix(in oklab, var(--mun-accent) 78%, #ffffff) 55%,
+    var(--mun-accent) 100%
+  );
+  box-shadow:
+    0 8px 24px color-mix(in oklab, var(--mun-accent) 45%, transparent),
+    0 0 0 1px color-mix(in oklab, #ffffff 25%, transparent) inset;
+  animation: ctaGlowPulse 2.6s ease-in-out infinite;
+  transition: transform 0.12s ease;
+  will-change: transform;
+}
+.cta-shiny:active {
+  transform: scale(0.975);
+}
+.cta-shiny::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -60%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 100%
+  );
+  transform: skewX(-18deg);
+  animation: ctaSweep 3.2s ease-in-out infinite;
+}
+@keyframes ctaSweep {
+  0% { left: -60%; }
+  55%, 100% { left: 130%; }
+}
+@keyframes ctaGlowPulse {
+  0%, 100% {
+    box-shadow:
+      0 8px 24px color-mix(in oklab, var(--mun-accent) 40%, transparent),
+      0 0 0 1px color-mix(in oklab, #ffffff 25%, transparent) inset;
+  }
+  50% {
+    box-shadow:
+      0 10px 34px color-mix(in oklab, var(--mun-accent) 65%, transparent),
+      0 0 0 1px color-mix(in oklab, #ffffff 35%, transparent) inset;
+  }
+}
+/* 하단 고정 CTA 위 할인 배지 (다크 필 + 악센트 글로우 + 통통 튀는 모션) */
+.cta-discount-badge {
+  background: #17131b;
+  box-shadow: 0 4px 18px color-mix(in oklab, var(--mun-accent) 60%, transparent);
+  animation: ctaBadgeBob 1.7s ease-in-out infinite;
+}
+@keyframes ctaBadgeBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-shiny { animation: none; }
+  .cta-shiny::before { animation: none; display: none; }
+  .cta-discount-badge { animation: none; }
+}

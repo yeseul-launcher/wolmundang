@@ -5,6 +5,8 @@ import { BlurWord } from "@/components/result/BlurWord";
 import { LoveTypeRadarChart } from "@/components/result/LoveTypeRadarChart";
 import { MarriagePossibilityChart } from "@/components/result/MarriagePossibilityChart";
 import { ReviewSection } from "@/components/result/ReviewSection";
+import { TalismanSection } from "@/components/result/TalismanSection";
+import { StickyCTA } from "@/components/result/StickyCTA";
 import { me, partner, CHARACTER_NAME } from "@/lib/resultData";
 import { josa } from "@/lib/korean";
 import { REVIEWS } from "@/lib/reviewData";
@@ -12,7 +14,7 @@ import { REVIEWS } from "@/lib/reviewData";
 export default function ResultPage() {
   return (
     <div className="relative mx-auto min-h-screen w-full max-w-[440px] overflow-x-clip bg-[#1a1a1f] text-white shadow-2xl">
-      <main className="flex w-full flex-col pb-[100px]">
+      <main className="flex w-full flex-col pb-[132px]">
         {/* 비책 hook (도령 영상 + 말풍선) */}
         <BubbleSection
           media={{
@@ -57,13 +59,6 @@ export default function ResultPage() {
               그 녀석을 그대 발밑에 두게 만들 구체적인 전략, 궁금하지 않소? 궁합 리포트 열어보시오. {josa(partner.name, "이/가")} 절대 거부 못 하는 <BlurWord>유혹의 기술</BlurWord>이랑 녀석이 그대한테 매달리게 될 <BlurWord>결정적 시기</BlurWord>까지 월별로 다 짚어주리다.
             </p>
           </div>
-
-          <button
-            type="button"
-            className="mt-5 w-full rounded-lg bg-primary py-4 text-[16px] font-semibold text-white"
-          >
-            그 남자의 속마음 확인하기
-          </button>
         </SajuChartSection>
 
         {/* 서운함 공감 (도령 이미지 + 말풍선) */}
@@ -225,6 +220,9 @@ export default function ResultPage() {
           ]}
         />
 
+        {/* 액막이 부적 */}
+        <TalismanSection />
+
         {/* 리뷰 캐러셀 */}
         <ReviewSection
           brandName={CHARACTER_NAME}
@@ -233,6 +231,8 @@ export default function ResultPage() {
           reviews={REVIEWS}
         />
       </main>
+
+      <StickyCTA label="그 남자의 속마음, 지금 확인하기" />
     </div>
   );
 }
