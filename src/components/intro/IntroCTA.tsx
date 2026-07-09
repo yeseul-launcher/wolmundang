@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ChevronRight } from "lucide-react";
 
 const MASKED_NAMES = [
   "김*수",
@@ -71,13 +72,17 @@ export function IntroCTA({ label, onClick }: IntroCTAProps) {
           </div>
         </div>
 
-        {/* CTA 버튼 (온보딩 하단 버튼과 동일 디자인) */}
+        {/* CTA 버튼 (화려한 그라데이션 + 광택 스윕) */}
         <button
           type="button"
           onClick={onClick}
-          className="w-full rounded-lg bg-primary py-4 text-base font-semibold text-white transition-opacity outline-none focus:outline-none"
+          className="cta-shiny flex w-full items-center justify-center gap-1.5 rounded-xl py-[17px] text-[17px] font-bold tracking-[-0.2px] text-white outline-none focus:outline-none"
         >
-          {label}
+          <span className="relative z-10 break-keep">{label}</span>
+          <ChevronRight
+            className="relative z-10 h-[19px] w-[19px] shrink-0"
+            strokeWidth={2.6}
+          />
         </button>
       </div>
     </div>

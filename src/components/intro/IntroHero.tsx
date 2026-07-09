@@ -5,10 +5,18 @@ import { ChevronLeft } from "lucide-react";
 interface IntroHeroProps {
   title: string;
   subtitleLines: string[];
+  videoSrc?: string;
+  poster?: string;
   onBack?: () => void;
 }
 
-export function IntroHero({ title, subtitleLines, onBack }: IntroHeroProps) {
+export function IntroHero({
+  title,
+  subtitleLines,
+  videoSrc = "/videos/namsim-hero.mp4",
+  poster = "/images/namsim-hero-poster.jpg",
+  onBack,
+}: IntroHeroProps) {
   return (
     <>
       {/* 풀스크린 배경 영상 (온보딩과 동일 구조) */}
@@ -19,10 +27,10 @@ export function IntroHero({ title, subtitleLines, onBack }: IntroHeroProps) {
           loop
           playsInline
           preload="metadata"
-          poster="/images/namsim-hero-poster.jpg"
+          poster={poster}
           className="h-full w-full object-cover object-top"
         >
-          <source src="/videos/namsim-hero.mp4" type="video/mp4" />
+          <source src={videoSrc} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-[image:var(--hero-gradient)]" />
       </div>
@@ -52,8 +60,9 @@ export function IntroHero({ title, subtitleLines, onBack }: IntroHeroProps) {
           {title}
         </p>
         <p
-          className="mt-3 text-[#a8bcd9]"
+          className="mt-3"
           style={{
+            color: "var(--mun-accent-soft-2)",
             fontFamily: "SolmoeKimDaeGeon, serif",
             fontWeight: 300,
             fontSize: "min(5.2vw, 23px)",
