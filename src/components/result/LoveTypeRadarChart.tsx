@@ -25,7 +25,7 @@ const data = [
 const chartConfig = {
   value: {
     label: "연애 유형",
-    color: "#5285D4",
+    color: "var(--mun-accent)",
   },
 } satisfies ChartConfig;
 
@@ -86,9 +86,9 @@ export function LoveTypeRadarChart() {
         <PolarAngleAxis dataKey="trait" tick={<BlurredTraitTick />} />
         <Radar
           dataKey="value"
-          fill="#5285D4"
+          fill="var(--mun-accent)"
           fillOpacity={0.55}
-          stroke="#79A5E8"
+          stroke="var(--mun-accent-2)"
           strokeWidth={2}
         />
       </RadarChart>

@@ -16,17 +16,21 @@ interface PeekSectionProps {
   titleLines: TitleSegment[][];
   cards: PeekCard[];
   paddingTop?: number;
+  /** 잠금 박스 상단 제목 (캐릭터 말투에 맞춰 교체) */
+  lockTitle?: string;
+  /** 엿보기 상단 라벨 텍스트 (기본 "엿보기") */
+  eyebrowText?: string;
 }
 
-function LockedCard({ card }: { card: PeekCard }) {
+function LockedCard({ card, lockTitle }: { card: PeekCard; lockTitle: string }) {
   return (
     <div className="result-thin-border-card mt-7 rounded-2xl p-5">
       <div className="flex flex-col items-center text-center">
-        <p className="font-suit text-[24px] font-bold break-keep" style={{ color: "#D8E4F5" }}>
+        <p className="font-suit text-[24px] font-bold break-keep" style={{ color: "var(--mun-accent-soft-2)" }}>
           {card.subtitle}
         </p>
         {card.desc && (
-          <p className="mt-1.5 text-[14px] break-keep" style={{ color: "#C8D8ECcc" }}>
+          <p className="mt-1.5 text-[14px] break-keep" style={{ color: "color-mix(in oklab, var(--mun-accent-soft) 80%, transparent)" }}>
             {card.desc}
           </p>
         )}
@@ -35,9 +39,17 @@ function LockedCard({ card }: { card: PeekCard }) {
       {card.visual ? (
         <div className="mt-4">{card.visual}</div>
       ) : card.image ? (
-        <div className="mt-4 w-full overflow-hidden rounded-xl">
+        <div
+          className="mt-4 w-full overflow-hidden rounded-xl"
+          style={{ aspectRatio: "3 / 4" }}
+        >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={card.image} alt="" loading="lazy" className="block h-auto w-full" />
+          <img
+            src={card.image}
+            alt=""
+            loading="lazy"
+            className="block h-full w-full object-cover object-center"
+          />
         </div>
       ) : null}
 
@@ -45,7 +57,7 @@ function LockedCard({ card }: { card: PeekCard }) {
         <div
           aria-hidden
           className="flex flex-col gap-2.5 py-4 text-[15px] leading-[1.75] select-none"
-          style={{ filter: "blur(3px)", color: "#C8D8EC" }}
+          style={{ filter: "blur(3px)", color: "var(--mun-accent-soft)" }}
         >
           {card.blurredParagraphs.map((p, i) => (
             <p key={i}>{p}</p>
@@ -64,18 +76,18 @@ function LockedCard({ card }: { card: PeekCard }) {
             className="text-center font-bold tracking-[2px] text-white"
             style={{ fontFamily: "GapyeongHanseokbong, serif", fontSize: 21 }}
           >
-            이런 풀이를 더 해주겠소
+            {lockTitle}
           </p>
           <div
             className="mx-auto mt-3 h-px w-[80%]"
             style={{
               background:
-                "linear-gradient(to right, transparent, #5285D4, transparent)",
+                "linear-gradient(to right, transparent, var(--mun-accent), transparent)",
             }}
           />
           <ul
             className="mx-auto mt-3.5 flex w-fit flex-col items-start gap-2.5 text-left text-[13px]"
-            style={{ color: "#C8D8EC" }}
+            style={{ color: "var(--mun-accent-soft)" }}
           >
             {card.teaserItems.map((item, i) => (
               <li key={i} className="flex items-start gap-2">
@@ -98,6 +110,8 @@ export function PeekSection({
   titleLines,
   cards,
   paddingTop = 24,
+  lockTitle = "이런 풀이를 더 해주겠소",
+  eyebrowText = "엿보기",
 }: PeekSectionProps) {
   return (
     <section
@@ -114,7 +128,7 @@ export function PeekSection({
           className="text-[15px] tracking-[3px]"
           style={{ fontFamily: "GapyeongHanseokbong, serif" }}
         >
-          엿보기 {index}
+          {eyebrowText} {index}
         </p>
         <span className="text-[14px]">❖</span>
         <div
@@ -149,7 +163,7 @@ export function PeekSection({
       </div>
 
       {cards.map((card, i) => (
-        <LockedCard key={i} card={card} />
+        <LockedCard key={i} card={card} lockTitle={lockTitle} />
       ))}
     </section>
   );

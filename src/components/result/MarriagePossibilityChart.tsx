@@ -29,7 +29,7 @@ const data = [
 const chartConfig = {
   possibility: {
     label: "결혼 가능성",
-    color: "#5285D4",
+    color: "var(--mun-accent)",
   },
 } satisfies ChartConfig;
 
@@ -72,7 +72,7 @@ function PeakDot(props: {
   if (index !== peakIndex || cx == null || cy == null) return null;
   return (
     <g>
-      <circle cx={cx} cy={cy} r={5} fill="#79A5E8" stroke="#ffffff" strokeWidth={2} />
+      <circle cx={cx} cy={cy} r={5} fill="var(--mun-accent-2)" stroke="#ffffff" strokeWidth={2} />
       <g transform={`translate(${cx}, ${cy - 30})`}>
         <text
           x={0}
@@ -83,7 +83,7 @@ function PeakDot(props: {
           fill="#ffffff"
           style={{
             filter:
-              "drop-shadow(0 0 1.5px #5285D4) drop-shadow(0 0 3px #5285D4)",
+              "drop-shadow(0 0 1.5px var(--mun-accent)) drop-shadow(0 0 3px var(--mun-accent))",
           }}
         >
           BEST!
@@ -99,8 +99,8 @@ export function MarriagePossibilityChart() {
       <AreaChart data={data} margin={{ left: 20, right: 24, top: 56, bottom: 4 }}>
         <defs>
           <linearGradient id="marriagePossibilityFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="5%" stopColor="#5285D4" stopOpacity={0.6} />
-            <stop offset="95%" stopColor="#5285D4" stopOpacity={0.05} />
+            <stop offset="5%" stopColor="var(--mun-accent)" stopOpacity={0.6} />
+            <stop offset="95%" stopColor="var(--mun-accent)" stopOpacity={0.05} />
           </linearGradient>
         </defs>
         <CartesianGrid vertical={false} stroke="rgba(255,255,255,0.1)" />
@@ -116,7 +116,7 @@ export function MarriagePossibilityChart() {
           dataKey="possibility"
           type="natural"
           fill="url(#marriagePossibilityFill)"
-          stroke="#79A5E8"
+          stroke="var(--mun-accent-2)"
           strokeWidth={2.5}
           dot={<PeakDot />}
           activeDot={false}

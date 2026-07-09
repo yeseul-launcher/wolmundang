@@ -74,8 +74,13 @@ function PersonChart({ person, label }: { person: Person; label: string }) {
 interface SajuChartSectionProps {
   characterName: string;
   me: Person;
-  partner: Person;
-  /** 사주판 카드 안, 두 사람 차트 아래에 이어서 넣을 콘텐츠 (리딩 텍스트, 잠금 게이트 등) */
+  /** 궁합(2인)일 때 상대. 없으면 솔로(1인) 사주판으로 렌더 */
+  partner?: Person;
+  /** 상단 타이틀 override (미지정 시 캐릭터/이름으로 자동 생성) */
+  title?: React.ReactNode;
+  /** 본인 차트 라벨 (기본 "본인") */
+  meLabel?: string;
+  /** 사주판 카드 안, 차트 아래에 이어서 넣을 콘텐츠 (리딩 텍스트, 잠금 게이트 등) */
   children?: React.ReactNode;
 }
 
@@ -83,6 +88,8 @@ export function SajuChartSection({
   characterName,
   me,
   partner,
+  title,
+  meLabel = "본인",
   children,
 }: SajuChartSectionProps) {
   return (
@@ -91,16 +98,24 @@ export function SajuChartSection({
         className="w-full px-6 text-center text-[26px] font-extrabold leading-[1.35] tracking-[-0.5px] break-keep"
         style={{ color: "#F4E8D0", fontFamily: "GapyeongHanseokbong, serif" }}
       >
-        {characterName}이 들여다본
-        <br />
-        {me.name}과 {partner.name}의 궁합
+        {title ?? (
+          <>
+            {characterName}이 들여다본
+            <br />
+            {partner ? `${me.name}과 ${partner.name}의 궁합` : `${me.name}의 사주`}
+          </>
+        )}
       </p>
 
       <div className="w-full px-[16px] pt-[36px] pb-[16px]">
         <div className="result-thin-border-card mx-auto w-full max-w-[400px] overflow-hidden rounded-[16px]">
-          <PersonChart person={me} label="본인" />
-          <div className="mx-[20px] h-px bg-white/10" />
-          <PersonChart person={partner} label="상대" />
+          <PersonChart person={me} label={meLabel} />
+          {partner && (
+            <>
+              <div className="mx-[20px] h-px bg-white/10" />
+              <PersonChart person={partner} label="상대" />
+            </>
+          )}
           {children && (
             <div className="px-[20px] py-[20px]">{children}</div>
           )}
